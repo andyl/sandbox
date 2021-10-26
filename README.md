@@ -1,19 +1,29 @@
 # Sandbox
 
-To start your Phoenix server:
+## About
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Site for Phoenix Experiments
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+| Webapp      | CSS Framework | Purpose         | Dev  | Prod |
+|-------------|---------------|-----------------|------|------|
+| sandbox_web | Milligram     | Index Site      | 4000 | 80   |
+| sandbox_mg  | Milligram     | Milligram Demos | 4001 | 8081 |
+| sandbox_bs  | Bootstrap5    | Bootstrap Demos | 4002 | 8082 |
+| sandbox_tw  | Tailwind      | Tailwind Demos  | 4003 | 8083 |
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Setting Up
 
-## Learn more
+Creating the App
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+    mix phx.new sandbox --umbrella
+
+Creating a Milligram Webapp (sandbox_mg)
+
+    cd apps
+    mix phx.new sandbox_mg --no-ecto
+
+Updating Config for SandboxMg
+
+    cd ../config
+    { substitute "SandboxWeb" for "SandboxMg" }
+
