@@ -20,6 +20,8 @@ defmodule SandboxWeb.Router do
     get "/", PageController, :index
 
     live_session :default do
+      live "/static", PostLive.Static
+
       live "/posts", PostLive.Index, :index
       live "/posts/new", PostLive.Index, :new
       live "/posts/:id/edit", PostLive.Index, :edit
