@@ -1,21 +1,17 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Config module.
+# This file is responsible for configuring your umbrella
+# and **all applications** and their dependencies with the
+# help of the Config module.
 #
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
+# Note that all applications in your umbrella share the
+# same configuration and dependencies, which is why they
+# all use the same configuration file. If you want different
+# configurations or dependencies per app, it is best to
+# move said applications out of the umbrella.
 import Config
 
+# Configure Mix tasks and generators
 config :sandbox,
   ecto_repos: [Sandbox.Repo]
-
-# Configures the endpoint
-config :sandbox, SandboxWeb.Endpoint,
-  url: [host: "localhost"],
-  render_errors: [view: SandboxWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Sandbox.PubSub,
-  live_view: [signing_salt: "hVcd3Ucv"]
 
 # Configures the mailer
 #
@@ -29,13 +25,24 @@ config :sandbox, Sandbox.Mailer, adapter: Swoosh.Adapters.Local
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 
+config :sandbox_web,
+  ecto_repos: [Sandbox.Repo],
+  generators: [context_app: :sandbox]
+
+# Configures the endpoint
+config :sandbox_web, SandboxWeb.Endpoint,
+  url: [host: "localhost"],
+  render_errors: [view: SandboxWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Sandbox.PubSub,
+  live_view: [signing_salt: "5rqLMTM6"]
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.12.18",
   default: [
     args:
       ~w(js/app.js --bundle --target=es2016 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../assets", __DIR__),
+    cd: Path.expand("../apps/sandbox_web/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 

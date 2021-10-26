@@ -15,16 +15,16 @@ config :sandbox, Sandbox.Repo,
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :sandbox, SandboxWeb.Endpoint,
+config :sandbox_web, SandboxWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "uXB0XIc2UUvwWMtHtJM30rZdsZ6IhaT6HIIcIfakNV3YzVQ9MqEcyUfFyM7ovAaZ",
+  secret_key_base: "DQFpKoQpV13Pf2mIxmz2EtQDJo1mpLW0yKoZT3CA76VAVvnGovk5iXYdVfBn12Yx",
   server: false
-
-# In test we don't send emails.
-config :sandbox, Sandbox.Mailer, adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# In test we don't send emails.
+config :sandbox, Sandbox.Mailer, adapter: Swoosh.Adapters.Test
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
