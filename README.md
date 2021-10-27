@@ -9,8 +9,8 @@ Site for Phoenix Experiments
 | sandbox_web | Milligram     | Index   | 4000 | 80   |
 | sandbox_mg  | Milligram     | Demos   | 4001 | 8081 |
 | sandbox_b5  | Bootstrap5    | Demos   | 4002 | 8082 |
-| sandbox_bu  | Bulma         | Demos   | 4003 | 8083 |
-| sandbox_tw  | Tailwind      | Demos   | 4004 | 8084 |
+| sandbox_tw  | Tailwind      | Demos   | 4003 | 8083 |
+| sandbox_bu  | Bulma         | Demos   | 4004 | 8084 |
 
 ## Guidelines
 
@@ -69,7 +69,7 @@ Edit configs
     :s/sandbox_web/sandbox_mg/g
 
     edit dev.exs - copy block "sandbox_web" to "sandbox_mg"
-    :s/4000/4001/g
+    :s/4000/400x/g
     :s/SandboxWeb/SandboxMgWeb/g
     :s/sandbox_web/sandbox_mg/g
 
@@ -80,37 +80,34 @@ Run the server
 
 ### Create a Bootstrap5 Webapp (sandbox_b5)
 
-Create sandbox_b5 
+Follow the same procedure as for sandbox_mg, except:
 
-    cd apps
-    mix phx.new sandbox_b5 --no-ecto
-    { edit sandbox_b5/mix.exs to update dependencies }
-    cd ..
-    mix deps.get
-    
-Edit configs
-
-    cd config
-
-    edit config.exs - copy block "sandbox_web" to "sandbox_b5"
     :s/SandboxWeb/SandboxB5Web/g
     :s/sandbox_web/sandbox_b5/g
 
-    edit config.exs - esbuild section - copy block "sandbox_web" to "sandbox_b5"
-    :s/sandbox_web/sandbox_b5/g
+Guide to Install Bootstrap
 
-    edit dev.exs - copy block "sandbox_web" to "sandbox_b5"
-    :s/4000/4001/g
-    :s/SandboxWeb/SandboxB5Web/g
-    :s/sandbox_web/sandbox_b5/g
+    https://fullstackphoenix.com/tutorials/bootstrap-5-and-phoenix-liveview
 
-Run the server
+### Create a Tailwind Webapp (sandbox_tw)
 
-    cd ..
-    mix phx.server
+Follow the same procedure as for sandbox_mg, except:
 
-Install Bootstrap
+    :s/SandboxWeb/SandboxTwWeb/g
+    :s/sandbox_web/sandbox_tw/g
 
-   guide: https://fullstackphoenix.com/tutorials/bootstrap-5-and-phoenix-liveview
+Guide to Install Tailwind
 
+    https://pragmaticstudio.com/tutorials/adding-tailwind-css-to-phoenix
+
+### Create a Bulma Webapp (sandbox_bu)
+
+Follow the same procedure as for sandbox_mg, except:
+
+    :s/SandboxWeb/SandboxBuWeb/g
+    :s/sandbox_web/sandbox_bu/g
+
+Guide to Install Bulma
+
+    https://kevinlang.me/bulma-phoenix-1-6/
 
