@@ -21,14 +21,32 @@ config :sandbox_web, SandboxWeb.Endpoint,
   pubsub_server: Sandbox.PubSub,
   live_view: [signing_salt: "5rqLMTM6"]
 
+# ----- sandbox_mg_web ------
+
+config :sandbox_mg,
+  ecto_repos: [Sandbox.Repo],
+  generators: [context_app: :sandbox]
+
+config :sandbox_mg, SandboxMgWeb.Endpoint,
+  url: [host: "localhost"],
+  render_errors: [view: SandboxMgWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Sandbox.PubSub,
+  live_view: [signing_salt: "5rqLMTM6"]
+
 # ----- esbuild -----
 
 config :esbuild,
   version: "0.12.18",
-  default: [
+  sandbox_web: [
     args:
       ~w(js/app.js --bundle --target=es2016 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../apps/sandbox_web/assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ],
+  sandbox_mg: [
+    args:
+      ~w(js/app.js --bundle --target=es2016 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../apps/sandbox_mg/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
