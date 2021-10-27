@@ -21,7 +21,7 @@ config :sandbox_web, SandboxWeb.Endpoint,
   pubsub_server: Sandbox.PubSub,
   live_view: [signing_salt: "5rqLMTM6"]
 
-# ----- sandbox_mg_web ------
+# ----- sandbox_mg ------
 
 config :sandbox_mg,
   ecto_repos: [Sandbox.Repo],
@@ -30,6 +30,18 @@ config :sandbox_mg,
 config :sandbox_mg, SandboxMgWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: SandboxMgWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Sandbox.PubSub,
+  live_view: [signing_salt: "5rqLMTM6"]
+
+# ----- sandbox_b5 ------
+
+config :sandbox_b5,
+  ecto_repos: [Sandbox.Repo],
+  generators: [context_app: :sandbox]
+
+config :sandbox_b5, SandboxB5Web.Endpoint,
+  url: [host: "localhost"],
+  render_errors: [view: SandboxB5Web.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Sandbox.PubSub,
   live_view: [signing_salt: "5rqLMTM6"]
 
@@ -48,6 +60,21 @@ config :esbuild,
       ~w(js/app.js --bundle --target=es2016 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../apps/sandbox_mg/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ],
+  sandbox_b5: [
+    args:
+      ~w(js/app.js --bundle --target=es2016 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../apps/sandbox_b5/assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+# ----- dart_sass ----- 
+
+config :dart_sass,
+  version: "1.42.1",
+  sandbox_b5: [
+    args: ~w(css/app.scss ../priv/static/assets/app.css),
+    cd: Path.expand("../apps/sandbox_b5/assets", __DIR__)
   ]
 
 # ----- misc -----

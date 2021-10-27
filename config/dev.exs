@@ -54,6 +54,30 @@ config :sandbox_mg, SandboxMgWeb.Endpoint,
     ]
   ]
 
+# ----- sandbox_b5 -----
+
+config :sandbox_b5, SandboxB5Web.Endpoint,
+  http: [ip: {127, 0, 0, 1}, port: 4002],
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "XP321cPQEdHrG9iyZHnPgAG4CfSIhPd8f5k/EHKNfNuYwiqCu5OQAxDFIF3GzDLF",
+  watchers: [
+    esbuild: {Esbuild, :install_and_run, [:sandbox_b5, ~w(--sourcemap=inline --watch)]},
+    sass: {DartSass, :install_and_run, [:sandbox_b5, ~w(--embed-source-map --source-map-urls=absolute --watch)]}
+  ]
+
+config :sandbox_b5, SandboxB5Web.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/sandbox_b5_web/(live|views)/.*(ex)$",
+      ~r"lib/sandbox_b5_web/templates/.*(eex)$"
+    ]
+  ]
+
+
 # ----- misc -----
 
 config :logger, :console, format: "[$level] $message\n"

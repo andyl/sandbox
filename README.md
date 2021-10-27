@@ -78,4 +78,39 @@ Run the server
     cd ..
     mix phx.server
 
-### 
+### Create a Bootstrap5 Webapp (sandbox_b5)
+
+Create sandbox_b5 
+
+    cd apps
+    mix phx.new sandbox_b5 --no-ecto
+    { edit sandbox_b5/mix.exs to update dependencies }
+    cd ..
+    mix deps.get
+    
+Edit configs
+
+    cd config
+
+    edit config.exs - copy block "sandbox_web" to "sandbox_b5"
+    :s/SandboxWeb/SandboxB5Web/g
+    :s/sandbox_web/sandbox_b5/g
+
+    edit config.exs - esbuild section - copy block "sandbox_web" to "sandbox_b5"
+    :s/sandbox_web/sandbox_b5/g
+
+    edit dev.exs - copy block "sandbox_web" to "sandbox_b5"
+    :s/4000/4001/g
+    :s/SandboxWeb/SandboxB5Web/g
+    :s/sandbox_web/sandbox_b5/g
+
+Run the server
+
+    cd ..
+    mix phx.server
+
+Install Bootstrap
+
+   guide: https://fullstackphoenix.com/tutorials/bootstrap-5-and-phoenix-liveview
+
+
